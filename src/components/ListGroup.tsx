@@ -1,13 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 
-export default function ListGroup() {
+interface Props {
+  items: string[];
+  heading: string;
+  onSelectItem: (item: string) => void;
+}
+
+export default function ListGroup({ items, heading, onSelectItem }: Props) {
+  let [selectedIdx, setSelectedIdx] = useState(-1);
+
   return (
-    <ul className="list-group">
-      <li className="list-group-item">An item</li>
-      <li className="list-group-item">A second item</li>
-      <li className="list-group-item">A third item</li>
-      <li className="list-group-item">A fourth item</li>
-      <li className="list-group-item">And a fifth one</li>
-    </ul>
+    <>
+      <h1>{heading}</h1>
+      {items.length === 0 ? <p>No Items Found</p>
+        : (
+          <ul className="list-group mb-3">
+            {items?.map((item, idx) => <li className={ selectedIdx === idx ? "list-group-item active" : "list-group-item" } onClick={() => {
+              setSelectedIdx(idx);
+              onSelectItem(item);
+            }} key={idx}>{item}</li>)}
+          </ul>
+        )}
+    </>
   );
 }
