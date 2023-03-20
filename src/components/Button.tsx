@@ -6,7 +6,7 @@ interface Props {
 
 const Button = ({ children, color = 'secondary', onClick }: Props) => {
   return (
-    <button type="button" id="myAlert" className={`btn btn-${color}`} onClick={onClick}>{children}</button>
+    <button type="button" id="myAlert" className={`btn btn-${color} me-2`} onClick={onClick}>{children}</button>
   )
 }
 
